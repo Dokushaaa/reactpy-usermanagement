@@ -1,8 +1,14 @@
-# React + Vite
+# React (axios) + Python (flask)
+to run : npm install -D tailwindcss postcss autoprefixer react-router-dom react-icons react-markdown fluid-tailwind gh-pages axios
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+run on cmd: PYTHON backend/v2/main.py
+run on (SEPERATE)cmd: npm run dev -- --host
 
-Currently, two official plugins are available:
+includes: crud, search, sort by name/id by status, nightmode, is active implementation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Light Mode:
+![project screenshot](https://github.com/Dokushaaa/reactpy-usermanagement/blob/main/lightMode_output.png)
+
+Dark Mode:
+![project screenshot](https://github.com/Dokushaaa/reactpy-usermanagement/blob/main/darkMode_output.png)
+
