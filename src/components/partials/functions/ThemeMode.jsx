@@ -2,7 +2,7 @@ import React from "react";
 import { BsMoonStarsFill } from "react-icons/bs";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-const LightMode = () => {
+const ThemeMode = () => {
 	function handleChangeColorTheme() {
 		if (
 			localStorage.getItem("theme") !== null &&
@@ -64,4 +64,4 @@ const LightMode = () => {
 	);
 };
 
-export default LightMode;
+export default ThemeMode;

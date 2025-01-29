@@ -104,6 +104,18 @@ export const setIsLogin = (val) => {
 		payload: val,
 	};
 };
+export const setIsId = (val) => {
+	return {
+		type: "IS_ID",
+		payload: val,
+	};
+};
+export const setIsViewId = (val) => {
+	return {
+		type: "IS_VIEWID",
+		payload: val,
+	};
+};
 export const setCredentials = (data) => {
 	return {
 		type: "CREDENTIALS",

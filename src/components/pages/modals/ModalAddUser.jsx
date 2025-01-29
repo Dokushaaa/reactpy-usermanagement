@@ -1,14 +1,27 @@
 import React from "react";
-import ModalWrapper from "./ModalWrapper";
 import { FaTimesCircle } from "react-icons/fa";
-import { StoreContext } from "../../../store/StoreContext";
 import { setIsAdd } from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
+import ModalWrapper from "./ModalWrapper";
 
 const ModalAddUser = ({
 	handleSubmit,
 	email,
 	name,
+	yearGraduated,
+	course,
+	birthDate,
+	address,
+	contactNo,
+	currentStatus,
+	// edit: setters
 	setName,
+	setYearGraduated,
+	setCourse,
+	setBirthDate,
+	setAddress,
+	setContactNo,
+	setCurrentStatus,
 	setEmail,
 	is_Active,
 	setIs_Active,
@@ -40,6 +53,79 @@ const ModalAddUser = ({
 									onChange={(e) => setName(e.target.value)}
 									required
 								/>
+								{/* CALENDAR SELECT */}
+								<input
+									type='month'
+									id='start'
+									name='start'
+									min='1900-01'
+									max='2100-01'
+									value={yearGraduated}
+									onChange={(e) => setYearGraduated(e.target.value)}
+									required
+								/>
+
+								<select
+									name='Course'
+									id='Course'
+									placeholder='Course'
+									value={course}
+									onChange={(e) => setCourse(e.target.value)}
+									required>
+									<option
+										hidden
+										value='Course'>
+										Course
+									</option>
+									<option value='BSIT'>BSIT</option>
+									<option value='bscpe'>Bscpe</option>
+									<option value='bsaa'>Bsaa</option>
+									<option value='stars'>Stars</option>
+								</select>
+
+								<input
+									type='date'
+									id='start'
+									name='start'
+									min='1900-01-01'
+									max='2100-01-01'
+									value={birthDate}
+									placeholder='1999-01'
+									onChange={(e) => setBirthDate(e.target.value)}
+									required
+								/>
+								<input
+									type='text'
+									placeholder='Address'
+									value={address}
+									onChange={(e) => setAddress(e.target.value)}
+									required
+								/>
+								<input
+									type='number'
+									placeholder='ContactNo'
+									value={contactNo}
+									onChange={(e) => setContactNo(e.target.value)}
+									required
+								/>
+								{/* current status */}
+								<select
+									name='Status'
+									id='Status'
+									placeholder='Status'
+									value={currentStatus}
+									onChange={(e) => setCurrentStatus(e.target.value)}
+									required>
+									<option
+										hidden
+										value=''>
+										Occupational Status
+									</option>
+									<option value='Unemployed'>Unemployed</option>
+									<option value='Employed'>Employed</option>
+									<option value='Self-Employed'>Self-Employed</option>
+									<option value='Business-Owner'>Business-Owner</option>
+								</select>
 								<input
 									type='email'
 									placeholder='Email'
@@ -47,10 +133,11 @@ const ModalAddUser = ({
 									onChange={(e) => setEmail(e.target.value)}
 									required
 								/>
-
+								{/* Active Status */}
 								<div className='flex flex-row gap-2 py-5 w-2/3'>
 									<p className='mb-0 pt-1'>Status:</p>
 									<select
+										className='isActive'
 										name='is_Active'
 										onChange={(e) => setIs_Active(e.target.value)}
 										value={is_Active}>

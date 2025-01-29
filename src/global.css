@@ -26,7 +26,7 @@
 	--header: 255 255 255;
 	--primary: 26 26 26;
 	--secondary: 0 0 0;
-	--accent: 254 241 96;
+	--accent: 255 95 31;
 	--yellow: 184 153 106;
 	--content: 255 255 255;
 	--search: 255 255 255;
@@ -182,7 +182,10 @@
 			@apply block w-full p-1 rounded-md border-2 text-content/50 focus:border-info focus:bg-primary focus:text-content;
 		}
 		select {
-			@apply block w-full p-1 rounded-md border-2 text-stone-800 focus:border-info focus:bg-primary focus:text-content;
+			@apply block w-full p-1 rounded-md border-2 text-stone-800 focus:border-info focus:bg-primary px-10 focus:text-content;
+		}
+		.isActive {
+			@apply block w-full p-1 rounded-md border-2 text-stone-800 focus:border-info focus:bg-primary px-0 focus:text-content;
 		}
 
 		small {
@@ -291,6 +294,11 @@
 	.tooltip:after {
 		@apply p-0.5 px-1.5 rounded-md absolute content-[attr(data-tooltip)] text-xs text-content top-[calc(100%+10px)] left-0 bg-secondary/90 scale-0 transition-transform;
 	}
+	.user.info {
+		div div p {
+			@apply font-FiraCode font-medium;
+		}
+	}
 }
 
 /* parent utils*/
@@ -348,6 +356,25 @@
 	/* edit */
 	.btn--edit {
 		@apply bg-primary text-content hover:bg-accent hover:border-accent border-2 border-accent hover:text-primary transition-all duration-500;
+	}
+	.nav {
+		@apply space-y-4 mt-20 text-primary;
+		.nav-link {
+			@apply p-1 pl-8  border-2 border-primary rounded-lg;
+			a {
+				@apply p-2 flex gap-3 items-center mx-5;
+			}
+		}
+		.navigator-active {
+			@apply border-l border-primary bg-red-500;
+			a {
+				@apply text-primary mx-0;
+			}
+		}
+
+		.navigator:hover a {
+			@apply text-content;
+		}
 	}
 }
 

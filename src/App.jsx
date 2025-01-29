@@ -1,5 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import MainTable from "./components/pages/developer/MainHome";
+
+import DashboardInfo from "./components/pages/developer/dashboard/DashboardInfo";
+import MainHome from "./components/pages/developer/home/MainHome";
 import { StoreProvider } from "./store/StoreContext";
 function App() {
 	return (
@@ -9,7 +11,11 @@ function App() {
 					<Routes>
 						<Route
 							path='/*'
-							element={<MainTable />}
+							element={<MainHome />}
+						/>
+						<Route
+							path='/graph'
+							element={<DashboardInfo />}
 						/>
 					</Routes>
 				</Router>

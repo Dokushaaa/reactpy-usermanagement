@@ -17,6 +17,8 @@ const initVal = {
 	isLoading: false,
 	isFetching: false,
 	isLogin: false,
+	isId: "",
+	isViewId: false,
 
 	credentials: {},
 };

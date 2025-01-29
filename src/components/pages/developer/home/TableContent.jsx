@@ -8,7 +8,8 @@ import {
 	FaSortNumericDown,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import LightMode from "../../partials/functions/LightMode";
+import LightMode from "../../../partials/functions/ThemeMode";
+import ThemeMode from "../../../partials/functions/ThemeMode";
 
 const TableContent = ({ handleSearch, handleAdd, handleSortByName }) => {
 	return (
@@ -44,7 +45,7 @@ const TableContent = ({ handleSearch, handleAdd, handleSortByName }) => {
 									</>
 								)}
 							</button>
-							<LightMode />
+							<ThemeMode />
 						</div>
 					</div>
 				</div>

@@ -1,31 +1,42 @@
+import React from "react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import UserList from "./UserList";
-import DbHeader from "../../partials/header/DbHeader";
-import ModalEditUser from "../modals/ModalEditUser";
-import ModalAddUser from "../modals/ModalAddUser";
-import { StoreContext } from "../../../store/StoreContext";
 import {
+	setError,
 	setIsAdd,
+	setIsArchive,
 	setIsDelete,
 	setIsEdit,
 	setIsLoading,
 	setMessage,
 	setSuccess,
-	setError,
-	setIsArchive,
-} from "../../../store/StoreAction";
-import Toast from "../modals/Toast";
-import TableContent from "./TableContent";
-import ModalError from "../modals/ModalError";
-import ModalDelete from "../modals/ModalDelete";
+} from "../../../../store/StoreAction";
+import { StoreContext } from "../../../../store/StoreContext";
+
+import DbHeader from "../../../partials/header/DbHeader";
+import ModalAddUser from "../../modals/ModalAddUser";
+import ModalEditUser from "../../modals/ModalEditUser";
+import UserList from "./UserList";
+
 import { FaDatabase } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import ModalArchive from "../modals/ModalArchive";
+import ModalArchive from "../../modals/ModalArchive";
+import ModalDelete from "../../modals/ModalDelete";
+import ModalError from "../../modals/ModalError";
+import Toast from "../../modals/Toast";
+import TableContent from "./TableContent";
+import AsideBar from "./AsideBar";
+import AsideInfo from "./UserInfo";
+import { ClockAlert } from "lucide-react";
 
-const MainTable = () => {
+const MainHome = () => {
 	const [users, setUsers] = React.useState([]);
 	const [name, setName] = React.useState("");
+	const [yearGraduated, setYearGraduated] = React.useState("");
+	const [course, setCourse] = React.useState("");
+	const [birthDate, setBirthDate] = React.useState("");
+	const [address, setAddress] = React.useState("");
+	const [contactNo, setContactNo] = React.useState("");
+	const [currentStatus, setCurrentStatus] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [is_Active, setIs_Active] = React.useState();
 	const [timeCreated, setTimeCreated] = React.useState();
@@ -34,6 +45,12 @@ const MainTable = () => {
 	// State for editing a user
 	const [editUserId, setEditUserId] = React.useState(null); // Track which user is being edited
 	const [editName, setEditName] = React.useState("");
+	const [editYearGraduated, setEditYearGraduated] = React.useState("");
+	const [editCourse, setEditCourse] = React.useState("");
+	const [editBirthDate, setEditBirthDate] = React.useState("");
+	const [editAddress, setEditAddress] = React.useState("");
+	const [editContactNo, setEditContactNo] = React.useState("");
+	const [editCurrentStatus, setEditCurrentStatus] = React.useState("");
 	const [editEmail, setEditEmail] = React.useState("");
 	const [editIs_Active, setEditIs_Active] = React.useState();
 	// is being archived:
@@ -42,6 +59,7 @@ const MainTable = () => {
 	const [deleteId, setDeleteId] = React.useState("");
 	// store contents:
 	const { store, dispatch } = React.useContext(StoreContext);
+	// open user info
 
 	React.useEffect(() => {
 		// localStorage for sorters:
@@ -80,6 +98,12 @@ const MainTable = () => {
 		axios
 			.post("http://localhost:5000/users", {
 				name,
+				yearGraduated,
+				course,
+				birthDate,
+				address,
+				contactNo,
+				currentStatus,
 				email,
 				is_Active,
 				timeCreated,
@@ -87,6 +111,12 @@ const MainTable = () => {
 			.then(() => {
 				// reset
 				setName("");
+				setYearGraduated("");
+				setCourse("");
+				setBirthDate("");
+				setAddress("");
+				setContactNo("");
+				setCurrentStatus("");
 				setEmail("");
 				setIs_Active("");
 				// refresh on add
@@ -148,6 +178,12 @@ const MainTable = () => {
 		axios
 			.put(`http://localhost:5000/users/${editUserId}`, {
 				name: editName,
+				yearGraduated: editYearGraduated,
+				course: editCourse,
+				birthDate: editBirthDate,
+				address: editAddress,
+				contactNo: editContactNo,
+				currentStatus: editCurrentStatus,
 				email: editEmail,
 			})
 			.then((response) => {
@@ -162,8 +198,14 @@ const MainTable = () => {
 					});
 				// Clear the edit state
 				setEditUserId(null);
-				setEditName("");
-				setEditEmail("");
+				setName("");
+				setYearGraduated("");
+				setCourse("");
+				setBirthDate("");
+				setAddress("");
+				setContactNo("");
+				setCurrentStatus("");
+				setEmail("");
 				// Dispatch state updates
 				dispatch(setIsEdit(false));
 				dispatch(setSuccess(true));
@@ -175,7 +217,7 @@ const MainTable = () => {
 			})
 			.catch((error) => {
 				dispatch(setError(true));
-				dispatch(setMessage("Create User failed!"));
+				dispatch(setMessage("Edit User failed!", error));
 				console.error("There was an error updating the user!", error);
 			});
 	};
@@ -234,7 +276,13 @@ const MainTable = () => {
 			const userToEdit = users.find((user) => user.id === id);
 			setEditUserId(id); // Set the id of the user being edited
 			setEditName(userToEdit[1]); // Set the name of the user to edit
-			setEditEmail(userToEdit[2]); // Set the email of the user to edit
+			setEditYearGraduated(userToEdit[2]);
+			setEditCourse(userToEdit[3]);
+			setEditBirthDate(userToEdit[4]);
+			setEditAddress(userToEdit[5]);
+			setEditContactNo(userToEdit[6]);
+			setEditCurrentStatus(userToEdit[7]);
+			setEditEmail(userToEdit[8]);
 		} catch (error) {
 			// console.log(error.cause);
 		}
@@ -246,11 +294,27 @@ const MainTable = () => {
 			// Find the user to edit
 			const userToEdit = users.find((user) => user.id === id);
 			setEditUserId(id); // Set the id of the user being edited
-			setEditIs_Active(userToEdit[3]); // Set the name of the user to edit
+			setEditIs_Active(userToEdit[9]); // Set the name of the user to edit
 		} catch (error) {
 			// console.log(error.cause);
 		}
 	};
+	// gets info
+	const openModal = async () => {
+		try {
+			const response = await axios.get("http://localhost:5000/get-info"); // Adjust URL based on your Flask server
+			setModalData(response.data.info); // Store the fetched data
+			setModalOpen(true); // Open the modal
+		} catch (error) {
+			console.error("Error fetching data:", error);
+		}
+	};
+	// Function to close the modal
+	const closeModal = () => {
+		setModalOpen(false);
+		setModalData(null); // Clear data when closing the modal
+	};
+
 	// Sorting function: by name
 	const handleSortByName = () => {
 		if (localStorage.getItem("sortName") === "preSorted") {
@@ -281,46 +345,52 @@ const MainTable = () => {
 
 	return (
 		<>
-			<DbHeader />
-			<div className='container'>
-				<TableContent
-					handleSearch={handleSearch}
-					handleAdd={handleAdd}
-					users={users}
-					handleSortByName={handleSortByName}
-				/>
-
-				{/* Display filtered users */}
-				<div className='w-full flex items-center gap-5 border-t-2 border-accent px-5 pt-2'>
-					<div className='w-1/2 justify-start'>
-						<h2>Master List</h2>
+			<div className='flex gap-5 flex-row justify-between w-full '>
+				<aside className='w-1/5'>
+					<AsideBar activeLink={"home"} />
+				</aside>
+				<main className='w-4/5 pr-20'>
+					{/* header */}
+					<DbHeader />
+					<TableContent
+						handleSearch={handleSearch}
+						handleAdd={handleAdd}
+						users={users}
+						handleSortByName={handleSortByName}
+					/>
+					{/* Display filtered users */}
+					<div className='w-full flex items-center gap-5 border-t-2 border-accent container pt-2'>
+						<div className='w-1/2 justify-start'>
+							<h2>Master List</h2>
+						</div>
+						<div className='w-1/2 flex items-center gap-2 justify-end'>
+							<p
+								className={
+									"rounded-lg btn-information bg-accent text-primary text-center gap-5 w-1/3 my-2"
+								}>
+								Entries Existing: {users.length}
+							</p>
+							<button className='btn btn-add bg-accent text-primary flex items-center  gap-2 justify-center w-1/3'>
+								<FaDatabase />
+								<Link
+									to='http://localhost/phpmyadmin/index.php?route=/database/structure&db=crud_db'
+									target='_blank'>
+									Database Link
+								</Link>
+							</button>
+						</div>
 					</div>
-					<div className='w-1/2 flex items-center gap-2 justify-end'>
-						<p
-							className={
-								"rounded-lg btn-information bg-accent text-primary text-center gap-5 w-1/3 my-2"
-							}>
-							Entries Existing: {users.length}
-						</p>
-						<button className='btn btn-add bg-accent text-primary flex items-center  gap-2 justify-center w-1/3'>
-							<FaDatabase />
-							<Link
-								to='http://localhost/phpmyadmin/index.php?route=/database/structure&db=crud_db'
-								target='_blank'>
-								Database Link
-							</Link>
-						</button>
-					</div>
-				</div>
-				<UserList
-					users={filteredUsers}
-					handleDeleteModal={handleDeleteModal}
-					handleDelete={handleDelete}
-					handleEdit={handleEdit}
-					handleStatusModal={handleStatusModal}
-					isLoading={store.isLoading}
-				/>
+					<UserList
+						users={filteredUsers}
+						handleDeleteModal={handleDeleteModal}
+						handleDelete={handleDelete}
+						handleEdit={handleEdit}
+						handleStatusModal={handleStatusModal}
+						isLoading={store.isLoading}
+					/>
+				</main>
 			</div>
+
 			{store.isDelete && (
 				<ModalDelete
 					handleDelete={handleDelete}
@@ -341,11 +411,25 @@ const MainTable = () => {
 				<ModalEditUser
 					// function pass
 					handleUpdate={handleUpdate}
-					// value pass
-					setEditName={setEditName}
-					setEditEmail={setEditEmail}
+					// is the id to edit
 					setEditUserId={setEditUserId}
+					// value pass : set
+					setEditName={setEditName}
+					setEditYearGraduated={setEditYearGraduated}
+					setEditCourse={setEditCourse}
+					setEditBirthDate={setEditBirthDate}
+					setEditAddress={setEditAddress}
+					setEditContactNo={setEditContactNo}
+					setEditCurrentStatus={setEditCurrentStatus}
+					setEditEmail={setEditEmail}
+					// value pass : data
 					editName={editName}
+					editYearGraduated={editYearGraduated}
+					editCourse={editCourse}
+					editBirthDate={editBirthDate}
+					editAddress={editAddress}
+					editContactNo={editContactNo}
+					editCurrentStatus={editCurrentStatus}
 					editEmail={editEmail}
 				/>
 			)}
@@ -356,9 +440,21 @@ const MainTable = () => {
 					// value pass
 					// text
 					name={name}
+					yearGraduated={yearGraduated}
+					course={course}
+					birthDate={birthDate}
+					address={address}
+					contactNo={contactNo}
+					currentStatus={currentStatus}
 					email={email}
 					// email
 					setName={setName}
+					setYearGraduated={setYearGraduated}
+					setCourse={setCourse}
+					setBirthDate={setBirthDate}
+					setAddress={setAddress}
+					setContactNo={setContactNo}
+					setCurrentStatus={setCurrentStatus}
 					setEmail={setEmail}
 					// bool
 					is_Active={is_Active}
@@ -372,4 +468,4 @@ const MainTable = () => {
 	);
 };
 
-export default MainTable;
+export default MainHome;

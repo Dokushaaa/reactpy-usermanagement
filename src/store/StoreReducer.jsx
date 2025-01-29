@@ -90,6 +90,17 @@ export const StoreReducer = (state, action) => {
 				...state,
 				isLogin: action.payload,
 			};
+		case "IS_ID":
+			return {
+				...state,
+				isId: action.payload,
+			};
+		case "IS_VIEWID":
+			return {
+				...state,
+				isViewId: action.payload,
+			};
+
 		case "CREDENTIALS":
 			return {
 				...state,
