@@ -15,9 +15,11 @@ const ModalDelete = ({ handleDelete }) => {
 				<ModalWrapper position={"center"}>
 					<div className='main-modal w-[400px] bg-primary text-content h-auto  rounded-xl '>
 						<div className='bg-accent w-full flex items-center text-center px-4 rounded-t-xl text-primary justify-between'>
-							<h4 className='mb-0 py-2 text-primary '>Delete current user?</h4>
+							<h4 className='mb-0 py-2 text-primary dark:text-content '>
+								Delete current user?
+							</h4>
 							<button
-								className='text-xl text-primary'
+								className='text-xl text-primary dark:text-content'
 								onClick={handleClose}>
 								<FaTimesCircle />
 							</button>
@@ -29,12 +31,12 @@ const ModalDelete = ({ handleDelete }) => {
 									onSubmit={handleDelete}>
 									<div className='w-full flex items-center gap-2 px-10 jusitfy-center'>
 										<button
-											className='btn btn-form btn--close text-primary'
+											className='btn btn-form btn--close text-primary dark:text-content'
 											onClick={handleClose}>
 											Close
 										</button>
 										<button
-											className='btn btn-form btn--edit'
+											className='btn btn-form btn--edit dark:text-content'
 											type='submit'>
 											Delete User
 										</button>

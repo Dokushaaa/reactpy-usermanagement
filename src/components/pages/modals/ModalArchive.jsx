@@ -21,9 +21,11 @@ const ModalArchive = ({
 			<ModalWrapper position={position}>
 				<div className='main-modal w-[400px] bg-primary text-content h-auto  rounded-xl '>
 					<div className='bg-accent w-full flex items-center text-center px-4 rounded-t-xl text-primary justify-between'>
-						<h4 className='mb-0 py-2 text-primary '>Change Status of user?</h4>
+						<h4 className='mb-0 py-2 text-primary dark:text-content'>
+							Change Status of user?
+						</h4>
 						<button
-							className='text-xl text-primary'
+							className='text-xl text-primary dark:text-content'
 							onClick={handleClose}>
 							<FaTimesCircle />
 						</button>
@@ -46,12 +48,12 @@ const ModalArchive = ({
 								</div>
 								<div className='w-full flex items-center gap-2 px-10 jusitfy-center'>
 									<button
-										className='btn btn-form btn--close text-primary'
+										className='btn btn-form btn--close text-primary dark:text-content'
 										onClick={handleClose}>
 										Close
 									</button>
 									<button
-										className='btn btn-form btn--edit'
+										className='btn btn-form bg-accent hover:bg-transparent border-2 border-transparent rounded-lg hover:bg-accent dark:text-content hover:border-accent transition-all duration-500 ease-in-out '
 										type='submit'>
 										Confirm
 									</button>

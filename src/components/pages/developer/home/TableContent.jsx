@@ -24,14 +24,14 @@ const TableContent = ({ handleSearch, handleAdd, handleSortByName }) => {
 						</div>
 						<div className='w-1/2 flex items-center flex-row gap-2 justify-end'>
 							<button
-								className='btn-add bg-accent text-primary w-1/4'
+								className='btn-add bg-accent text-primary dark:text-content w-1/4'
 								type='submit'
 								onClick={handleAdd}>
 								<FaPlus />
 								Add User
 							</button>
 							<button
-								className='btn bg-accent text-primary w-1/3 btn-add'
+								className='btn bg-accent text-primary w-1/3 btn-add dark:text-content'
 								onClick={handleSortByName}>
 								{localStorage.getItem("sortName") === "preSorted" ? (
 									<>

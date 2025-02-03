@@ -15,7 +15,7 @@ const DbHeader = ({
 	return (
 		<>
 			<header
-				className={`${
+				className={`bg-accent border-b-4 border-accent rounded-b-lg ${
 					type === true ? "border-b-4 border-accent" : ""
 				} py-1 w-full z-[99]`}>
 				<div className='container '>

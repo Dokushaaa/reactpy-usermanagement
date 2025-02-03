@@ -360,15 +360,15 @@
 	.nav {
 		@apply space-y-4 mt-20 text-primary;
 		.nav-link {
-			@apply p-1 pl-8  border-2 border-primary rounded-lg;
+			@apply p-1 pl-8  border-2 border-primary rounded-lg pl-10;
 			a {
-				@apply p-2 flex gap-3 items-center mx-5;
+				@apply p-2 flex gap-3 items-center mx-5 pl-5;
 			}
 		}
 		.navigator-active {
-			@apply border-l border-primary bg-red-500;
+			@apply border-l border-primary pl-6;
 			a {
-				@apply text-primary mx-0;
+				@apply text-primary mx-0 border-l-2 border-primary;
 			}
 		}
 

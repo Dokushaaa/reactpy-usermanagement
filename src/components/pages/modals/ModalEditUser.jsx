@@ -1,10 +1,11 @@
 import React from "react";
-import ModalWrapper from "./ModalWrapper";
 import { FaTimesCircle } from "react-icons/fa";
-import { StoreContext } from "../../../store/StoreContext";
 import { setIsEdit } from "../../../store/StoreAction";
+import { StoreContext } from "../../../store/StoreContext";
+import ModalWrapper from "./ModalWrapper";
 
 const ModalEditUser = ({
+	users,
 	setEditUserId,
 	handleUpdate,
 	// edit : getter states
@@ -25,6 +26,9 @@ const ModalEditUser = ({
 	setEditContactNo,
 	setEditCurrentStatus,
 	setEditEmail,
+	// choices:
+	courseSelection,
+	occuptationalStatus,
 }) => {
 	// store components
 	const { dispatch, store } = React.useContext(StoreContext);
@@ -36,9 +40,11 @@ const ModalEditUser = ({
 			<ModalWrapper position={"center"}>
 				<div className='main-modal w-[400px] bg-primary text-content h-auto  rounded-xl '>
 					<div className='bg-accent w-full flex items-center text-center px-4 rounded-t-xl text-primary justify-between'>
-						<h4 className='mb-0 py-2 text-primary '>Edit User</h4>
+						<h4 className='mb-0 py-2 text-primary dark:text-content '>
+							Edit User
+						</h4>
 						<button
-							className='text-xl text-primary'
+							className='text-xl text-primary dark:text-content'
 							onClick={handleClose}>
 							<FaTimesCircle />
 						</button>
@@ -81,10 +87,14 @@ const ModalEditUser = ({
 											value='Course'>
 											Course
 										</option>
-										<option value='BSIT'>BSIT</option>
-										<option value='bscpe'>Bscpe</option>
-										<option value='bsaa'>Bsaa</option>
-										<option value='stars'>Stars</option>
+										{courseSelection.map((courseItem) => (
+											<option
+												id={courseItem.courseCount}
+												key={courseItem.id}
+												value={courseItem.value}>
+												{...courseItem.name}
+											</option>
+										))}
 									</select>
 									{/* birthdate */}
 									<input
@@ -127,10 +137,18 @@ const ModalEditUser = ({
 											value=''>
 											Occupational Status
 										</option>
-										<option value='Unemployed'>Unemployed</option>
-										<option value='Employed'>Employed</option>
-										<option value='Self-Employed'>Self-Employed</option>
-										<option value='Business-Owner'>Business-Owner</option>
+										<>
+											{occuptationalStatus.map((occuItem) => (
+												<>
+													<option
+														id={occuItem.occupationalId}
+														key={occuItem.id}
+														value={occuItem.value}>
+														{occuItem.name}
+													</option>
+												</>
+											))}
+										</>
 									</select>
 									{/* email */}
 									<input
@@ -144,12 +162,12 @@ const ModalEditUser = ({
 
 								<div className='w-full flex items-center gap-2 px-10 jusitfy-center'>
 									<button
-										className='btn btn-form btn--close text-primary'
+										className='btn btn-form btn--close text-primary dark:text-content'
 										onClick={handleClose}>
 										Close
 									</button>
 									<button
-										className='btn btn-form btn--edit'
+										className='btn btn-form btn--edit dark:text-content'
 										type='submit'>
 										Edit User
 									</button>

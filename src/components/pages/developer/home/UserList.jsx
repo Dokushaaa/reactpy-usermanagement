@@ -26,8 +26,9 @@ const UserList = ({
 	handleStatusEdit,
 	handleStatusModal,
 }) => {
-	const adminMessages = ["n/a"];
+	const counter = [1, 2, 3, 4, 5, 6];
 	const { store, dispatch } = React.useContext(StoreContext);
+	console.log(counter);
 	const isLoaded = () => {
 		setTimeout(() => {
 			dispatch(setIsLoading(false));
@@ -45,7 +46,7 @@ const UserList = ({
 				<main className='w-full py-'>
 					<table className='table-users w-full'>
 						<thead className='border-b border-content'>
-							<tr className=' bg-content/10'>
+							<tr className=' bg-content/10 text-content'>
 								<th className='w-[50px]'>Id</th>
 								<th className='w-[175px]'>Name</th>
 								<th className='w-[175px]'>Contact No</th>
@@ -58,12 +59,15 @@ const UserList = ({
 							{users.length === 0 && (
 								<>
 									<tr>
-										<td>{adminMessages[0]}</td>
-										<td>{adminMessages[0]}</td>
-										<td>{adminMessages[0]}</td>
-										<td>{adminMessages[0]}</td>
-										<td>{adminMessages[0]}</td>
-										<td>{adminMessages[0]}</td>
+										{counter.map((index) => (
+											<>
+												<td
+													className='text-content'
+													key={index}>
+													null
+												</td>
+											</>
+										))}
 									</tr>
 								</>
 							)}
@@ -99,7 +103,7 @@ const UserList = ({
 														className={` mx-auto ${
 															user[9] === 1
 																? `bg-green-300 rounded-full px-3 w-fit mt-2 text-green-950`
-																: `bg-red-300 rounded-full px-3 w-fit mt-2 text-red-950`
+																: `bg-red-300 rounded-full px-3 w-fit mt-2 text-red-950 `
 														}`}>
 														{user[9] ? "Active" : "Inactive"}
 													</p>

@@ -47,7 +47,7 @@ const Toast = ({ type }) => {
 										<FaTimesCircle />
 									</button>
 								</div>
-								<div className='flex items-center justify-center text-accent text-center text-7xl'>
+								<div className='flex items-center justify-center dark:text-content text-accent text-center text-7xl'>
 									<MdOutlineQuestionMark />
 								</div>
 								<div className='pb-2'>
@@ -57,7 +57,7 @@ const Toast = ({ type }) => {
 										</>
 									) : (
 										<>
-											<p className='mb-0 text-center text-xl '>
+											<p className='mb-0 text-center text-xl dark:text-content '>
 												{store.message}
 											</p>
 										</>
@@ -65,7 +65,7 @@ const Toast = ({ type }) => {
 								</div>
 								<button
 									onClick={handleCloseMain}
-									className='bg-accent rounded-lg p-2 text-primary'>
+									className='bg-accent rounded-lg p-2 dark:text-content text-primary'>
 									Confirm
 								</button>
 							</div>

@@ -96,7 +96,7 @@ const UserInfo = ({ users, isId, setIsId }) => {
 						<div className='flex w-full items-center justify-end'>
 							<button
 								onClick={handleCloseMain}
-								className='bg-accent rounded-lg w-1/2  p-2 text-primary '>
+								className='bg-accent rounded-lg w-1/2 dark:text-content p-2 text-primary '>
 								Confirm
 							</button>
 						</div>

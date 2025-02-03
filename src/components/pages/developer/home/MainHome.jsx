@@ -1,5 +1,5 @@
-import React from "react";
 import axios from "axios";
+import React from "react";
 import {
 	setError,
 	setIsAdd,
@@ -24,9 +24,6 @@ import ModalDelete from "../../modals/ModalDelete";
 import ModalError from "../../modals/ModalError";
 import Toast from "../../modals/Toast";
 import TableContent from "./TableContent";
-import AsideBar from "./AsideBar";
-import AsideInfo from "./UserInfo";
-import { ClockAlert } from "lucide-react";
 
 const MainHome = () => {
 	const [users, setUsers] = React.useState([]);
@@ -60,6 +57,51 @@ const MainHome = () => {
 	// store contents:
 	const { store, dispatch } = React.useContext(StoreContext);
 	// open user info
+
+	// selection:
+	const courseSelection = [
+		{
+			courseCount: 1,
+			name: "Bachelor of Science in Information Technology",
+			value: "BS Information Technology",
+		},
+		{
+			courseCount: 2,
+			name: "Bachelor of Science in Computer Science",
+			value: "BS Computer Science",
+		},
+		{
+			courseCount: 3,
+			name: "Bachelor of Science in Computer Engineering",
+			value: "BS Computer Technology",
+		},
+		{
+			courseCount: 4,
+			name: "Bachelor of Science in Industrial Technology",
+			value: "BS Industrial Technology",
+		},
+		{
+			courseCount: 5,
+			name: "Bachelor of Science in Psychology",
+			value: "BS Psychology",
+		},
+		{
+			courseCount: 6,
+			name: "Bachelor of Science in Accounting",
+			value: "BS Accounting",
+		},
+		{
+			courseCount: 7,
+			name: "Bachelor of Science in Business Administration",
+			value: "BS Business Administration",
+		},
+	];
+	const occuptationalStatus = [
+		{ occupationalId: 1, name: "Unemployed", value: "Unemployed" },
+		{ occupationalId: 2, name: "Employed", value: "Employed" },
+		{ occupationalId: 3, name: "Self-Employed", value: "Self-Employed" },
+		{ occupationalId: 4, name: "Business-Owner", value: "Business-Owner" },
+	];
 
 	React.useEffect(() => {
 		// localStorage for sorters:
@@ -346,48 +388,47 @@ const MainHome = () => {
 	return (
 		<>
 			<div className='flex gap-5 flex-row justify-between w-full '>
-				<aside className='w-1/5'>
-					<AsideBar activeLink={"home"} />
-				</aside>
-				<main className='w-4/5 pr-20'>
+				<main className='w-full'>
 					{/* header */}
 					<DbHeader />
-					<TableContent
-						handleSearch={handleSearch}
-						handleAdd={handleAdd}
-						users={users}
-						handleSortByName={handleSortByName}
-					/>
-					{/* Display filtered users */}
-					<div className='w-full flex items-center gap-5 border-t-2 border-accent container pt-2'>
-						<div className='w-1/2 justify-start'>
-							<h2>Master List</h2>
+					<div className='container'>
+						<TableContent
+							handleSearch={handleSearch}
+							handleAdd={handleAdd}
+							users={users}
+							handleSortByName={handleSortByName}
+						/>
+						{/* Display filtered users */}
+						<div className='w-full flex items-center gap-5 border-t-2 border-accent container pt-2'>
+							<div className='w-1/2 justify-start'>
+								<h2>Master List</h2>
+							</div>
+							<div className='w-1/2 flex items-center gap-2 justify-end'>
+								<p
+									className={
+										"rounded-lg btn-information dark:text-content bg-accent text-primary text-center gap-5 w-1/3 my-2"
+									}>
+									Entries Existing: {users.length}
+								</p>
+								<button className='btn btn-add dark:text-content bg-accent text-primary flex items-center  gap-2 justify-center w-1/3'>
+									<FaDatabase />
+									<Link
+										to='http://localhost/phpmyadmin/index.php?route=/database/structure&db=crud_db'
+										target='_blank'>
+										Database Link
+									</Link>
+								</button>
+							</div>
 						</div>
-						<div className='w-1/2 flex items-center gap-2 justify-end'>
-							<p
-								className={
-									"rounded-lg btn-information bg-accent text-primary text-center gap-5 w-1/3 my-2"
-								}>
-								Entries Existing: {users.length}
-							</p>
-							<button className='btn btn-add bg-accent text-primary flex items-center  gap-2 justify-center w-1/3'>
-								<FaDatabase />
-								<Link
-									to='http://localhost/phpmyadmin/index.php?route=/database/structure&db=crud_db'
-									target='_blank'>
-									Database Link
-								</Link>
-							</button>
-						</div>
+						<UserList
+							users={filteredUsers}
+							handleDeleteModal={handleDeleteModal}
+							handleDelete={handleDelete}
+							handleEdit={handleEdit}
+							handleStatusModal={handleStatusModal}
+							isLoading={store.isLoading}
+						/>
 					</div>
-					<UserList
-						users={filteredUsers}
-						handleDeleteModal={handleDeleteModal}
-						handleDelete={handleDelete}
-						handleEdit={handleEdit}
-						handleStatusModal={handleStatusModal}
-						isLoading={store.isLoading}
-					/>
 				</main>
 			</div>
 
@@ -414,6 +455,7 @@ const MainHome = () => {
 					// is the id to edit
 					setEditUserId={setEditUserId}
 					// value pass : set
+					name={name}
 					setEditName={setEditName}
 					setEditYearGraduated={setEditYearGraduated}
 					setEditCourse={setEditCourse}
@@ -431,6 +473,10 @@ const MainHome = () => {
 					editContactNo={editContactNo}
 					editCurrentStatus={editCurrentStatus}
 					editEmail={editEmail}
+					// choices passer
+					courseSelection={courseSelection}
+					occuptationalStatus={occuptationalStatus}
+					users={users}
 				/>
 			)}
 			{store.isAdd && (
@@ -459,6 +505,9 @@ const MainHome = () => {
 					// bool
 					is_Active={is_Active}
 					setIs_Active={setIs_Active}
+					// choices passer
+					courseSelection={courseSelection}
+					occuptationalStatus={occuptationalStatus}
 				/>
 			)}
 

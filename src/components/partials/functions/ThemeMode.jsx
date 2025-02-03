@@ -47,14 +47,14 @@ const ThemeMode = () => {
 				{theme === false ? (
 					<>
 						<FaMoon
-							className='my-[3px] mx-[7px] rotate-20 text-primary transition-all
+							className='my-[3px] dark:text-content mx-[7px] rotate-20 text-primary transition-all
 				duration-500'
 						/>
 					</>
 				) : (
 					<>
 						<FaSun
-							className='my-[3px] mx-[7px] rotate-20 text-primary transition-all
+							className='my-[3px] dark:text-content mx-[7px] rotate-20 text-primary transition-all
 				duration-500'
 						/>
 					</>
